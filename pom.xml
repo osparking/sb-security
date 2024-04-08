@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bumsoap</groupId>
-	<artifactId>jssbasic</artifactId>
+	<artifactId>jss_sec01</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>jssbasic</name>
+	<name>jss_sec01</name>
 	<description>Demo project for Spring Boot and Spring Security </description>
 	<properties>
 		<java.version>17</java.version>
