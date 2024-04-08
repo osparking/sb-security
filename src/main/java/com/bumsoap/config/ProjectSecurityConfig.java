@@ -14,10 +14,10 @@ public class ProjectSecurityConfig {
       throws Exception {
     // @formatter:off
     http.authorizeHttpRequests(requests -> requests
-          .requestMatchers("/myCards", "/myAccount", "/myBalance", "/myLoans")
-          .authenticated()
-          .requestMatchers("/notices", "/contact")
-          .permitAll())
+        .requestMatchers("/notices", "/contact")
+          .permitAll()
+        .requestMatchers("/myCards", "/myAccount", "/myBalance", "/myLoans")
+          .authenticated())
         .formLogin(withDefaults())
         .httpBasic(withDefaults());
     return http.build();
