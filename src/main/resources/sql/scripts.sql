@@ -25,3 +25,14 @@ CREATE UNIQUE INDEX ix_auth_username
   on authorities (username,authority);
 
 show indexes from easybank.authorities;  
+
+create table customer (       
+  id int not null auto_increment,     
+  email varchar(100) not null,      
+  pwd varchar(200) not null,      
+  role varchar(100) not null,     
+  primary key(id)     
+);        
+
+insert into customer (email, pwd, role)       
+  values('john@example.com', '1111', 'admin');      
