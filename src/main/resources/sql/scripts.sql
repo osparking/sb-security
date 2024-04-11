@@ -26,6 +26,9 @@ CREATE UNIQUE INDEX ix_auth_username
 
 show indexes from easybank.authorities;  
 
+insert ignore into users values(null, 'happy', '1111', '1');      
+insert ignore into authorities values(null, 'happy', 'write');      
+
 create table customer (       
   id int not null auto_increment,     
   email varchar(100) not null,      
