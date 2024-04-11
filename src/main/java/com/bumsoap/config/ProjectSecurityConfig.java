@@ -16,11 +16,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class ProjectSecurityConfig {
 
-  public UserDetailsService userDetailsService(DataSource dataSource) {
+  @Bean
+  UserDetailsService userDetailsService(DataSource dataSource) {
     return new JdbcUserDetailsManager(dataSource);
   }
 
-  public PasswordEncoder passwordEncoder() {
+  @Bean
+  PasswordEncoder passwordEncoder() {
     return NoOpPasswordEncoder.getInstance();
   }
 
