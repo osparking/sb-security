@@ -22,7 +22,7 @@ public class ProjectSecurityConfig {
       throws Exception {
     // @formatter:off
     http.authorizeHttpRequests(requests -> requests
-        .requestMatchers("/notices", "/contact")
+        .requestMatchers("/notices", "/contact", "/register")
           .permitAll()
         .requestMatchers("/myCards", "/myAccount", "/myBalance", "/myLoans")
           .authenticated())
