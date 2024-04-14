@@ -1,7 +1,5 @@
 package com.bumsoap.model;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,8 +10,7 @@ import lombok.Data;
 @Data
 public class Customer {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-  @GenericGenerator(name = "native", strategy = "native")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String email;
   private String pwd;
