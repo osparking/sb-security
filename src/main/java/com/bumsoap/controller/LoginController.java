@@ -3,6 +3,7 @@ package com.bumsoap.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,11 +17,16 @@ public class LoginController {
   @Autowired
   private CustomerRepository customerRepository;
 
+  @Autowired
+  private PasswordEncoder passwordEncoder;
+  
   @PostMapping("/register")
   public ResponseEntity<String> register(@RequestBody Customer customer) {
     Customer result = null;
     ResponseEntity<String> response = null;
 
+    customer.setPwd(passwordEncoder.encode(customer.getPwd()));
+    
     try {
       result = customerRepository.save(customer);
       if (result.getId() > 0) {
