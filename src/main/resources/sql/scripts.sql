@@ -192,3 +192,51 @@ INSERT INTO `cards` (`card_number`, `customer_id`, `card_type`, `total_limit`,
 INSERT INTO `cards` (`card_number`, `customer_id`, `card_type`, `total_limit`, 
 `amount_used`, `available_amount`, `create_dt`)
  VALUES ('2359XXXX9346', 1, 'Credit', 20000, 4000, 16000, CURDATE());
+
+CREATE TABLE `notice_details` (
+  `notice_id` int NOT NULL AUTO_INCREMENT,
+  `notice_summary` varchar(200) NOT NULL,
+  `notice_details` varchar(500) NOT NULL,
+  `notic_beg_dt` date NOT NULL,
+  `notic_end_dt` date DEFAULT NULL,
+  `create_dt` date DEFAULT NULL,
+  `update_dt` date DEFAULT NULL,
+  PRIMARY KEY (`notice_id`)
+);
+
+INSERT INTO `notice_details` ( `notice_summary`, `notice_details`, 
+`notic_beg_dt`, `notic_end_dt`, `create_dt`, `update_dt`)
+VALUES ('Home Loan Interest rates reduced', 
+'정부 지침에 따라 대출금리가 다소 인하되었다. The updated rates will be effective immediately',
+CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+
+INSERT INTO `notice_details` ( `notice_summary`, `notice_details`, 
+`notic_beg_dt`, `notic_end_dt`, `create_dt`, `update_dt`)
+VALUES ('Net Banking Offers', 
+'인터넷 뱅킹 사용 고객에게 적용되는 조치 - while opening a saving account will get a $50 amazon voucher',
+CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+
+INSERT INTO `notice_details` ( `notice_summary`, `notice_details`, 
+`notic_beg_dt`, `notic_end_dt`, `create_dt`, `update_dt`)
+VALUES ('Mobile App Downtime', 
+'이지은행의 모바일 앱 사용 고객은 will be down from 2AM-5AM on 12/05/2020 due to maintenance activities',
+CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+
+INSERT INTO `notice_details` ( `notice_summary`, `notice_details`, 
+`notic_beg_dt`, `notic_end_dt`, `create_dt`, `update_dt`)
+VALUES ('E Auction notice', 
+'2024년 5월 12일 은행 사이트에서는 재입찰이 이루어진다. for all the stubborn arrears.Interested parties can participate in the e-auction',
+CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+
+INSERT INTO `notice_details` ( `notice_summary`, `notice_details`, 
+`notic_beg_dt`, `notic_end_dt`, `create_dt`, `update_dt`)
+VALUES ('Launch of Millennia Cards', 
+'우리 은행은 새 신용카드를 발주하였다. for the premium customers of EazyBank. With these cards, you will get 5% cashback for each purchase',
+CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+
+INSERT INTO `notice_details` ( `notice_summary`, `notice_details`, 
+`notic_beg_dt`, `notic_end_dt`, `create_dt`, `update_dt`)
+VALUES ('COVID-19 Insurance', 
+'이지뱅크는 보험 계홱을 새로 만들었다. which will cover COVID-19 expenses. Please reach out to the branch for more details',
+CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+ 
