@@ -135,5 +135,35 @@ INSERT INTO `account_transactions` (`transaction_id`, `account_number`,
 DATE_SUB(CURDATE(), INTERVAL 1 DAY), 'paris.co.kr', '출금', 100,34900,
 DATE_SUB(CURDATE(), INTERVAL 1 DAY));
 
+CREATE TABLE `loans` (
+  `loan_number` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `start_dt` date NOT NULL,
+  `loan_type` varchar(100) NOT NULL,
+  `total_loan` int NOT NULL,
+  `amount_paid` int NOT NULL,
+  `outstanding_amount` int NOT NULL,
+  `create_dt` date DEFAULT NULL,
+  PRIMARY KEY (`loan_number`),
+  KEY `customer_id` (`customer_id`),
+  CONSTRAINT `loan_customer_ibfk_1` FOREIGN KEY (`customer_id`) 
+    REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
+);
+
+INSERT INTO `loans` ( `customer_id`, `start_dt`, `loan_type`, `total_loan`, 
+`amount_paid`, `outstanding_amount`, `create_dt`)
+ VALUES ( 1, '2020-10-13', '주택', 200000, 50000, 150000, '2020-10-13');
+
+INSERT INTO `loans` ( `customer_id`, `start_dt`, `loan_type`, `total_loan`, 
+`amount_paid`, `outstanding_amount`, `create_dt`)
+ VALUES ( 1, '2020-06-06', '자동차', 40000, 10000, 30000, '2020-06-06');
+
+INSERT INTO `loans` ( `customer_id`, `start_dt`, `loan_type`, `total_loan`, 
+`amount_paid`, `outstanding_amount`, `create_dt`)
+ VALUES ( 1, '2018-02-14', '주택', 50000, 10000, 40000, '2018-02-14');
+
+INSERT INTO `loans` ( `customer_id`, `start_dt`, `loan_type`, `total_loan`, 
+`amount_paid`, `outstanding_amount`, `create_dt`)
+ VALUES ( 1, '2018-02-14', '생활비', 10000, 3500, 6500, '2018-02-14');
  
  
