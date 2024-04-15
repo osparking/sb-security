@@ -239,4 +239,14 @@ INSERT INTO `notice_details` ( `notice_summary`, `notice_details`,
 VALUES ('COVID-19 Insurance', 
 '이지뱅크는 보험 계홱을 새로 만들었다. which will cover COVID-19 expenses. Please reach out to the branch for more details',
 CURDATE() - INTERVAL 30 DAY, CURDATE() + INTERVAL 30 DAY, CURDATE(), null);
+
+CREATE TABLE `contact_messages` (
+  `contact_id` varchar(50) NOT NULL,
+  `contact_name` varchar(50) NOT NULL,
+  `contact_email` varchar(100) NOT NULL,
+  `subject` varchar(500) NOT NULL,
+  `message` varchar(2000) NOT NULL,
+  `create_dt` date DEFAULT NULL,
+  PRIMARY KEY (`contact_id`)
+);
  
