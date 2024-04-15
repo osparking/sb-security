@@ -38,4 +38,8 @@ create table customer (
 );        
 
 insert into customer (email, pwd, role)       
-  values('john@example.com', '1111', 'admin');      
+  values('john@example.com', '1111', 'admin');   
+  
+drop table `authorities`;
+drop table `users`;
+drop table `customer`;
