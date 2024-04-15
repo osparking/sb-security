@@ -11,33 +11,33 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "cards")
+@Table(name = "loans")
 @Data
-public class Cards {
+public class Loans {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "card_id")
-  private int cardId;
+  @Column(name = "loan_number")
+  private int loanNumber;
 
   @Column(name = "customer_id")
   private int customerId;
 
-  @Column(name = "card_number")
-  private String cardNumber;
+  @Column(name = "start_dt")
+  private Date startDt;
 
-  @Column(name = "card_type")
-  private String cardType;
+  @Column(name = "loan_type")
+  private String loanType;
 
-  @Column(name = "total_limit")
-  private int totalLimit;
+  @Column(name = "total_loan")
+  private int totalLoan;
 
-  @Column(name = "amount_used")
-  private int amountUsed;
+  @Column(name = "amount_paid")
+  private int amountPaid;
 
-  @Column(name = "available_amount")
-  private int availableAmount;
+  @Column(name = "outstanding_amount")
+  private int outstandingAmount;
 
   @Column(name = "create_dt")
-  private Date createDt;
+  private String createDt;
 }
