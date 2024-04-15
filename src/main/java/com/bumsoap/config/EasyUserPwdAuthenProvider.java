@@ -20,7 +20,9 @@ public class EasyUserPwdAuthenProvider implements AuthenticationProvider {
   @Override
   public Authentication authenticate(Authentication authentication)
       throws AuthenticationException {
-    // TODO Auto-generated method stub
+    String username = authentication.getName();
+    String password = authentication.getCredentials().toString();
+    var customers = customerRepository.findByEmail(username);
     return null;
   }
 
