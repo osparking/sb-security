@@ -74,3 +74,66 @@ INSERT INTO `accounts` (`customer_id`, `account_number`, `account_type`,
   `branch_address`, `create_dt`)
  VALUES (1, 1865764534, 'Savings', '서울 강남구 강남대로 125번길 101호', CURDATE());
  
+CREATE TABLE `account_transactions` (
+  `transaction_id` varchar(200) NOT NULL,
+  `account_number` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `transaction_dt` date NOT NULL,
+  `transaction_summary` varchar(200) NOT NULL,
+  `transaction_type` varchar(100) NOT NULL,
+  `transaction_amt` int NOT NULL,
+  `closing_balance` int NOT NULL,
+  `create_dt` date DEFAULT NULL,
+  PRIMARY KEY (`transaction_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `account_number` (`account_number`),
+  CONSTRAINT `accounts_ibfk_2` FOREIGN KEY (`account_number`) 
+    REFERENCES `accounts` (`account_number`) ON DELETE CASCADE,
+  CONSTRAINT `acct_user_ibfk_1` FOREIGN KEY (`customer_id`) 
+    REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
+);
+
+INSERT INTO `account_transactions` (`transaction_id`, `account_number`, 
+  `customer_id`, `transaction_dt`, `transaction_summary`, `transaction_type`,
+  `transaction_amt`,
+`closing_balance`, `create_dt`)  VALUES (UUID(), 1865764534, 1, 
+  DATE_SUB(CURDATE(), INTERVAL 7 DAY), '백다방', '출금', 30,34500,
+  DATE_SUB(CURDATE(), INTERVAL 7 DAY));
+
+INSERT INTO `account_transactions` (`transaction_id`, `account_number`, 
+`customer_id`, `transaction_dt`, `transaction_summary`, `transaction_type`,
+`transaction_amt`,
+`closing_balance`, `create_dt`)  VALUES (UUID(), 1865764534, 1, 
+DATE_SUB(CURDATE(), INTERVAL 6 DAY), '택시', '출금', 100,34400,
+DATE_SUB(CURDATE(), INTERVAL 6 DAY));
+
+INSERT INTO `account_transactions` (`transaction_id`, `account_number`, 
+`customer_id`, `transaction_dt`, `transaction_summary`, `transaction_type`,
+`transaction_amt`,
+`closing_balance`, `create_dt`)  VALUES (UUID(), 1865764534, 1, 
+DATE_SUB(CURDATE(), INTERVAL 5 DAY), '직접입금', '입금', 500,34900,
+DATE_SUB(CURDATE(), INTERVAL 5 DAY));
+
+INSERT INTO `account_transactions` (`transaction_id`, `account_number`, 
+`customer_id`, `transaction_dt`, `transaction_summary`, `transaction_type`,
+`transaction_amt`,
+`closing_balance`, `create_dt`)  VALUES (UUID(), 1865764534, 1, 
+DATE_SUB(CURDATE(), INTERVAL 4 DAY), '네이버쇼핑', '출금', 600,34300,
+DATE_SUB(CURDATE(), INTERVAL 4 DAY));
+
+INSERT INTO `account_transactions` (`transaction_id`, `account_number`, 
+`customer_id`, `transaction_dt`, `transaction_summary`, `transaction_type`,
+`transaction_amt`,
+`closing_balance`, `create_dt`)  VALUES (UUID(), 1865764534, 1, 
+DATE_SUB(CURDATE(), INTERVAL 2 DAY), '온라인송금', '입금', 700,35000,
+DATE_SUB(CURDATE(), INTERVAL 2 DAY));
+
+INSERT INTO `account_transactions` (`transaction_id`, `account_number`, 
+`customer_id`, `transaction_dt`, `transaction_summary`, `transaction_type`,
+`transaction_amt`,
+`closing_balance`, `create_dt`)  VALUES (UUID(), 1865764534, 1, 
+DATE_SUB(CURDATE(), INTERVAL 1 DAY), 'paris.co.kr', '출금', 100,34900,
+DATE_SUB(CURDATE(), INTERVAL 1 DAY));
+
+ 
+ 
