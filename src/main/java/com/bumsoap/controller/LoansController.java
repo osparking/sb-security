@@ -1,13 +1,22 @@
 package com.bumsoap.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bumsoap.model.Loans;
+import com.bumsoap.repository.LoansRepository;
 
 @RestController
 public class LoansController {
-  @GetMapping("/myLoans")
-  public String getLoanDetails() {
-    return "이것은 디비에서 읽어온 대출 계정 상세";
-  }
+  @Autowired
+  private LoansRepository loanRepository;
 
+  @GetMapping("/myLoans")
+  public List<Loans> getLoanDetails(@RequestParam int custId) {
+    return loanRepository.findByCustomerIdOrderByStartDtDesc(custId);
+  }
 }
