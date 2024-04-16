@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -26,7 +25,8 @@ public class ProjectSecurityConfig {
         .authorizeHttpRequests(requests -> requests
         .requestMatchers("/notices", "/contact", "/register")
           .permitAll()
-        .requestMatchers("/myCards", "/myAccount", "/myBalance", "/myLoans")
+        .requestMatchers("/myCards", "/myAccount", "/myBalance", "/myLoans",
+            "/user")
           .authenticated())
         .formLogin(withDefaults())
         .httpBasic(withDefaults());
