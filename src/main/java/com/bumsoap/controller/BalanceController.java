@@ -1,13 +1,24 @@
 package com.bumsoap.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bumsoap.model.AccountTransactions;
+import com.bumsoap.repository.AccountTransactionsRepository;
 
 @RestController
 public class BalanceController {
-  @GetMapping("/myBalance")
-  public String getBalanceDetails() {
-    return "이것은 디비에서 읽어온 계정 잔고 상세";
-  }
 
+  @Autowired
+  private AccountTransactionsRepository transactionsRepository;
+
+  @GetMapping("/myBalance")
+  public List<AccountTransactions> getBalanceDetails(@RequestParam int custId) {
+    return transactionsRepository
+        .findByCustomerIdOrderByTransactionDtDesc(custId);
+  }
 }
