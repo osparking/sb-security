@@ -42,7 +42,6 @@ public class ProjectSecurityConfig {
               return config;
             }
           }))
-        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(requests -> requests
         .requestMatchers("/notices", "/contact", "/register")
           .permitAll()
