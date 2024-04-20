@@ -16,7 +16,7 @@ public class AccountController {
   @Autowired
   private AccountsRepository accountsRepository;
 
-  @GetMapping("/myAccounts")
+  @GetMapping("/myAccount")
   public List<Accounts> getAccountDetails(@RequestParam int custId) {
     return accountsRepository.findByCustomerId(custId);
   }
