@@ -17,8 +17,8 @@ public class BalanceController {
   private AccountTransactionsRepository transactionsRepository;
 
   @GetMapping("/myBalance")
-  public List<AccountTransactions> getBalanceDetails(@RequestParam int custId) {
+  public List<AccountTransactions> getBalanceDetails(@RequestParam int id) {
     return transactionsRepository
-        .findByCustomerIdOrderByTransactionDtDesc(custId);
+        .findByCustomerIdOrderByTransactionDtDesc(id);
   }
 }
