@@ -35,7 +35,11 @@ public class EasyUserPwdAuthenProvider implements AuthenticationProvider {
     if (customers.size() > 0) {
       if (passwordEncoder.matches(password, customers.get(0).getPwd())) {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(customers.get(0).getRole()));
+
+        customers.get(0).getAuthorities().forEach(auth -> {
+          authorities.add(new SimpleGrantedAuthority(auth.getName()));
+        });
+
         return new UsernamePasswordAuthenticationToken(username, password,
             authorities);
       } else {
