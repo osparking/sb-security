@@ -67,7 +67,7 @@ public class ProjectSecurityConfig {
             .requestMatchers("/myAccount").hasRole("USER")
             .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/myLoans").hasRole("USER")
-            .requestMatchers("/myCards").hasRole("MANAGER")
+            .requestMatchers("/myCards").hasRole("USER")
             
             .requestMatchers("/notices", "/contact", "/register")
                 .permitAll()
