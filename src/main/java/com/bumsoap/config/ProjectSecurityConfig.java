@@ -59,11 +59,14 @@ public class ProjectSecurityConfig {
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
         .authorizeHttpRequests(requests -> requests
-        .requestMatchers("/notices", "/contact", "/register")
-          .permitAll()
-        .requestMatchers("/myCards", "/myAccount", "/myBalance", "/myLoans",
-            "/user")
-          .authenticated())
+            .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
+            .requestMatchers("/myBalance")
+                .hasAnyAuthority("VIEWACCOUNT", "VIEWBALANCE")
+            .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
+            .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
+            .requestMatchers("/notices", "/contact", "/register")
+                .permitAll()
+            .requestMatchers("/user").authenticated())
         .formLogin(withDefaults())
         .httpBasic(withDefaults());
     return http.build();
