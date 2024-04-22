@@ -63,7 +63,7 @@ public class ProjectSecurityConfig {
             .requestMatchers("/myBalance")
                 .hasAnyAuthority("VIEWACCOUNT", "VIEWBALANCE")
             .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
-            .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
+            .requestMatchers("/myCards").hasAuthority("VIEWCARDDETAILS")
             .requestMatchers("/notices", "/contact", "/register")
                 .permitAll()
             .requestMatchers("/user").authenticated())
