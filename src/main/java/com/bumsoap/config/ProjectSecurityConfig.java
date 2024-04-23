@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import com.bumsoap.filter.CsrfCookieFilter;
+import com.bumsoap.filter.CustomRequestValidationFilter;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -58,12 +59,9 @@ public class ProjectSecurityConfig {
             .ignoringRequestMatchers("/contact", "/register")
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+        .addFilterBefore(new CustomRequestValidationFilter(), 
+                                                BasicAuthenticationFilter.class)
         .authorizeHttpRequests(requests -> requests
-//            .requestMatchers("/myAccount").hasAuthority("VIEWACCOUNT")
-//            .requestMatchers("/myBalance")
-//                .hasAnyAuthority("VIEWACCOUNT", "VIEWBALANCE")
-//            .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
-//            .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
             .requestMatchers("/myAccount").hasRole("USER")
             .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/myLoans").hasRole("USER")
