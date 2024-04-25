@@ -2,6 +2,8 @@ package com.bumsoap.filter;
 
 import java.io.IOException;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import jakarta.servlet.FilterChain;
@@ -15,7 +17,8 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request,
       HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    
+    Authentication authentication = SecurityContextHolder.getContext()
+        .getAuthentication();
+
   }
 }
