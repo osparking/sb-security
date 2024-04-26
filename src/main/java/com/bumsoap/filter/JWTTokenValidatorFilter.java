@@ -6,6 +6,10 @@ import java.nio.charset.StandardCharsets;
 import javax.crypto.SecretKey;
 
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.bumsoap.constants.SecurityConstants;
@@ -35,9 +39,18 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter {
             .build()
             .parseSignedClaims(jwt)
             .getPayload();
+        String username = String.valueOf(claims.get("username"));
+        String authorities = (String) claims.get("authorities");
+        Authentication auth = new UsernamePasswordAuthenticationToken(username,
+            null,
+            AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
+        SecurityContextHolder.getContext().setAuthentication(auth);
       } catch (Exception e) {
         throw new BadCredentialsException("Invalid Token received!");
       }
     }
+    filterChain.doFilter(request, response);
+  }
+
   }
 }
