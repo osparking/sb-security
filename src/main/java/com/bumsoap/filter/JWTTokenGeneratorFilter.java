@@ -11,6 +11,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.bumsoap.constants.SecurityConstants;
 
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,6 +30,9 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
     if (null != authentication) {
       SecretKey key = Keys.hmacShaKeyFor(
           SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
+      String jwt = Jwts.builder().issuer("Eazy Bank").subject("JWT Token")
+          .claim("username", authentication.getName())
+          .compact();
     }
   }
 }
