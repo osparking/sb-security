@@ -22,6 +22,7 @@ import com.bumsoap.filter.AuthoritiesLoggingAfterFilter;
 import com.bumsoap.filter.CsrfCookieFilter;
 import com.bumsoap.filter.CustomRequestValidationFilter;
 import com.bumsoap.filter.JWTTokenGeneratorFilter;
+import com.bumsoap.filter.JWTTokenValidatorFilter;
 import com.bumsoap.filter.LoggingAtBasicAuthenFilter;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -70,6 +71,8 @@ public class ProjectSecurityConfig {
         .addFilterAfter(new AuthoritiesLoggingAfterFilter(), 
                                                 BasicAuthenticationFilter.class)        
         .addFilterAfter(new JWTTokenGeneratorFilter(), 
+                                                BasicAuthenticationFilter.class)        
+        .addFilterBefore(new JWTTokenValidatorFilter(), 
                                                 BasicAuthenticationFilter.class)        
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/myAccount").hasRole("USER")
