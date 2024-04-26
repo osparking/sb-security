@@ -48,6 +48,11 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
     filterChain.doFilter(request, response);
   }
 
+  @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) {
+    return !request.getServletPath().equals("/user");
+  }
+
   private String populateAuthorities(
       Collection<? extends GrantedAuthority> collection) {
     Set<String> authoritiesSet = new HashSet<>();
