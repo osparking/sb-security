@@ -3,6 +3,7 @@ package com.bumsoap.filter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,11 +37,17 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
           SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
       String jwt = Jwts.builder().issuer("범이비누").subject("Json W 토큰")
           .claim("username", authentication.getName())
-          .compact();
+          .claim("authorities",
+              populateAuthorities(authentication.getAuthorities()))
+          .issuedAt(new Date())
+          .expiration(new Date((new Date()).getTime() + 30000000))
+          .signWith(key).compact();
+      response.setHeader(SecurityConstants.JWT_HEADER, jwt);
     }
+
+    filterChain.doFilter(request, response);
   }
 
-  @SuppressWarnings("unused")
   private String populateAuthorities(
       Collection<? extends GrantedAuthority> collection) {
     Set<String> authoritiesSet = new HashSet<>();
