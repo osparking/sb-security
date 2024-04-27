@@ -11,7 +11,7 @@ import com.bumsoap.model.Loans;
 @Repository
 public interface LoansRepository extends CrudRepository<Loans, Integer> {
 
-  @PreAuthorize("hasRole('ROOT')")
+  @PreAuthorize("hasRole('USER')")
   List<Loans> findByCustomerIdOrderByStartDtDesc(int customerId);
 
 }
