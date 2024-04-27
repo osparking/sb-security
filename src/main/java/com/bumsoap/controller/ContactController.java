@@ -1,6 +1,7 @@
 package com.bumsoap.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -21,11 +22,14 @@ public class ContactController {
 
   @PostMapping("/contact")
   @PreFilter("filterObject.contactName != 'Test'")
-  public Contact saveUserInquiryDetails(@RequestBody List<Contact> contacts) {
+  public List<Contact> saveUserInquiryDetails(
+      @RequestBody List<Contact> contacts) {
     Contact contact = contacts.get(0);
     contact.setContactId(getServiceReqNumber());
     contact.setCreateDt(new Date(System.currentTimeMillis()));
-    return contactRepository.save(contact);
+    List<Contact> result = new ArrayList<>();
+    result.add(contactRepository.save(contact));
+    return result;
   }
 
   public String getServiceReqNumber() {
