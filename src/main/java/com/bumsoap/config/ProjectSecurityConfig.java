@@ -1,7 +1,5 @@
 package com.bumsoap.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -66,9 +64,11 @@ public class ProjectSecurityConfig {
             .requestMatchers("/notices", "/contact", "/register")
                 .permitAll()
             .requestMatchers("/user").authenticated())
-        .formLogin(withDefaults())
-        .httpBasic(withDefaults());
-    return http.build();
+        .oauth2ResourceServer(
+            oauth2ResourceServerCustomizer -> oauth2ResourceServerCustomizer
+                .jwt(jwtCustomizer -> jwtCustomizer
+                    .jwtAuthenticationConverter(jwtAuthenticationConverter)));
     // @formatter:on
+    return http.build();
   }
 }
