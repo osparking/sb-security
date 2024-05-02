@@ -18,12 +18,7 @@ import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
-import com.bumsoap.filter.AuthoritiesLoggingAfterFilter;
 import com.bumsoap.filter.CsrfCookieFilter;
-import com.bumsoap.filter.CustomRequestValidationFilter;
-import com.bumsoap.filter.JWTTokenGeneratorFilter;
-import com.bumsoap.filter.JWTTokenValidatorFilter;
-import com.bumsoap.filter.LoggingAtBasicAuthenFilter;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -64,16 +59,6 @@ public class ProjectSecurityConfig {
             .ignoringRequestMatchers("/contact", "/register")
             .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
         .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
-        .addFilterAt(new LoggingAtBasicAuthenFilter(), 
-                                                BasicAuthenticationFilter.class)
-        .addFilterBefore(new CustomRequestValidationFilter(), 
-                                                BasicAuthenticationFilter.class)
-        .addFilterAfter(new AuthoritiesLoggingAfterFilter(), 
-                                                BasicAuthenticationFilter.class)        
-        .addFilterAfter(new JWTTokenGeneratorFilter(), 
-                                                BasicAuthenticationFilter.class)        
-        .addFilterBefore(new JWTTokenValidatorFilter(), 
-                                                BasicAuthenticationFilter.class)        
         .authorizeHttpRequests(requests -> requests
             .requestMatchers("/myAccount").hasRole("USER")
             .requestMatchers("/myBalance").hasAnyRole("USER", "ADMIN")
